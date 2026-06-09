@@ -8,7 +8,12 @@ class Board:
         self.last_move = None # 앙파상 추적용: (start_pos, end_pos, piece)
         self.game_over_status = None # None, 'Checkmate_w', 'Checkmate_b', 'Stalemate'
         self.setup_board()
-
+    def reverseColor(self,color):
+        if color =="w":
+            return "b"
+        elif color == "b":
+            return "w"
+        return
     def setup_board(self):
         placement = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
         for col in range(8):
@@ -144,9 +149,4 @@ class Board:
             else:
                 # 체크가 아닌데 둘 수가 없으면 무승부 '스테일메이트'
                 self.game_over_status = 'Stalemate'
-    def reverseColor(self,color):
-        if color =="w":
-            return "b"
-        elif color == "b":
-            return "w"
-        return
+    
