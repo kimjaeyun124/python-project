@@ -18,7 +18,7 @@ class Board:
             self.grid[7][col] = placement[col]('w')
 
     def find_king(self, color, grid):
-        """특정 색상 킹의 위치를 반환합니다."""
+        """특정 색상 킹의 위치를 반환"""
         for r in range(8):
             for c in range(8):
                 if grid[r][c] and grid[r][c].name == 'k' and grid[r][c].color == color:
@@ -34,23 +34,27 @@ class Board:
                     # 무한 루프 방지를 위해 King 기물의 기본 이동(캐슬링 제외) 범위 내에 있는지 판단
                     if piece.name == 'k':
                         if max(abs(pos[0]-r), abs(pos[1]-c)) <= 1: return True
+                        #킹의 공격범위 안에 있는가 따로 검사
                     elif pos in piece.get_valid_moves((r, c), grid, self.last_move):
+                        #그냥 get_valid_moves 호출
                         return True
         return False
 
     def is_in_check(self, color, grid):
-        """킹이 체크당한 상태인지 확인합니다."""
+        """킹이 체크당한 상태인지 확인"""
         king_pos = self.find_king(color, grid)
-        if not king_pos: return False
-        enemy_color = 'b' if color == 'w' else 'w'
+        if not king_pos: 
+            return False
+        enemy_color = self.reverseColor(color)
         return self.is_under_attack(king_pos, enemy_color, grid)
 
     def get_strict_legal_moves(self, start_pos):
-        """체크 회피 의무를 반영한 '진짜 움직일 수 있는 합법적 칸'만 필터링합니다."""
+        """체크 회피 의무를 반영한 '진짜 움직일 수 있는 칸'만 필터링"""
         r, c = start_pos
         piece = self.grid[r][c]
-        if not piece or piece.color != self.turn: return []
-
+        if not piece or piece.color != self.turn:
+            # 자리에 말이 없거나 자기턴이 아닐경우
+            return []
         pseudo_moves = piece.get_valid_moves(start_pos, self.grid, self.last_move)
         strict_moves = []
 
@@ -58,7 +62,7 @@ class Board:
             # 시뮬레이션: 가상으로 말을 옮겨봄
             target_r, target_c = move
             original_target = self.grid[target_r][target_c]
-            
+
             self.grid[target_r][target_c] = piece
             self.grid[r][c] = None
 
@@ -66,8 +70,11 @@ class Board:
             if not self.is_in_check(self.turn, self.grid):
                 # 특수 예외: 캐슬링할 때 통과하는 칸들이 공격받고 있다면 제외해야 함
                 if piece.name == 'k' and abs(c - target_c) == 2:
-                    enemy = 'b' if self.turn == 'w' else 'w'
-                    pass_c = 5 if target_c == 6 else 3
+                    enemy = self.reverseColor(self.turn)
+                    if target_c == 6:
+                        pass_c = 5 
+                    else:
+                        pass_c = 3
                     if not self.is_under_attack((r, pass_c), enemy, self.grid) and not self.is_in_check(self.turn, self.grid):
                         strict_moves.append(move)
                 else:
@@ -114,8 +121,7 @@ class Board:
 
         # 앙파상 추적용 라스트 무브 기록 후 턴 교체
         self.last_move = (start_pos, end_pos, piece)
-        self.turn = 'b' if self.turn == 'w' else 'w'
-        
+        self.turn = self.reverseColor(self.turn)
         # 이동 직후 게임 종료 여부 정산
         self.check_game_status()
         return True
@@ -129,12 +135,18 @@ class Board:
                     if len(self.get_strict_legal_moves((r, c))) > 0:
                         has_any_move = True
                         break
-            if has_any_move: break
-
+            if has_any_move:
+                break
         if not has_any_move:
             if self.is_in_check(self.turn, self.grid):
                 # 체크 상태인데 둘 수가 없으면 '체크메이트' (이전 턴 유저 승리)
-                self.game_over_status = f'Checkmate_{"b" if self.turn == "w" else "w"}'
+                self.game_over_status = f'Checkmate_{self.reverseColor(self.turn)}'
             else:
                 # 체크가 아닌데 둘 수가 없으면 무승부 '스테일메이트'
                 self.game_over_status = 'Stalemate'
+    def reverseColor(self,color):
+        if color =="w":
+            return "b"
+        elif color == "b":
+            return "w"
+        return
