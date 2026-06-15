@@ -52,7 +52,7 @@ def load_images():
     images = {}
     piece_names = ['wp', 'wr', 'wn', 'wb', 'wq', 'wk', 'bp', 'br', 'bn', 'bb', 'bq', 'bk']
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    pieces_dir = os.path.join(base_dir, 'pieces')
+    pieces_dir = os.path.join(base_dir, '../pieces')
     for name in piece_names:
         png_path = os.path.join(pieces_dir, f'{name}.png')
         webp_path = os.path.join(pieces_dir, f'{name}.webp')
