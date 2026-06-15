@@ -1,0 +1,186 @@
+Index: ../README.md
+===================================================================
+diff --git a/../README.md b/../README.md
+deleted file mode 100644
+--- a/../README.md	(revision 0cbf8192a807a7bd17f1575f965e7bf5897713d7)
++++ /dev/null	(revision 0cbf8192a807a7bd17f1575f965e7bf5897713d7)
+@@ -1,2 +0,0 @@
+-# science
+-# science
+Index: ../science_project.py
+===================================================================
+diff --git a/../science_project.py b/../science_project.py
+deleted file mode 100644
+--- a/../science_project.py	(revision 0cbf8192a807a7bd17f1575f965e7bf5897713d7)
++++ /dev/null	(revision 0cbf8192a807a7bd17f1575f965e7bf5897713d7)
+@@ -1,76 +0,0 @@
+-import random
+-
+-
+-def start_codon_game():
+-    codon_table = {
+-        "AUG": "메티오닌",
+-        "UUU": "페닐알라닌", "UUC": "페닐알라닌",
+-        "UUA": "류신", "UUG": "류신", "CUU": "류신", "CUC": "류신", "CUA": "류신", "CUG": "류신",
+-        "AUU": "이소류신", "AUC": "이소류신", "AUA": "이소류신",
+-        "GUU": "발린", "GUC": "발린", "GUA": "발린", "GUG": "발린",
+-
+-        "UCU": "세린", "UCC": "세린", "UCA": "세린", "UCG": "세린", "AGU": "세린", "AGC": "세린",
+-        "CCU": "프롤린", "CCC": "프롤린", "CCA": "프롤린", "CCG": "프롤린",
+-        "ACU": "트레오닌", "ACC": "트레오닌", "ACA": "트레오닌", "ACG": "트레오닌",
+-        "GCU": "알라닌", "GCC": "알라닌", "GCA": "알라닌", "GCG": "알라닌",
+-
+-        "UAU": "티로신", "UAC": "티로신",
+-        "CAU": "히스티딘", "CAC": "히스티딘",
+-        "CAA": "글루타민", "CAG": "글루타민",
+-        "AAU": "아스파라긴", "AAC": "아스파라긴",
+-        "AAA": "라이신", "AAG": "라이신",
+-        "GAU": "아스파르트산", "GAC": "아스파르트산",
+-        "GAA": "글루타민산", "GAG": "글루타민산",
+-        "UGU": "시스테인", "UGC": "시스테인",
+-        "UGG": "트립토판",
+-        "CGU": "아르기닌", "CGC": "아르기닌", "CGA": "아르기닌", "CGG": "아르기닌", "AGA": "아르기닌", "AGG": "아르기닌",
+-        "GGU": "글라이신", "GGC": "글라이신", "GGA": "글라이신", "GGG": "글라이신",
+-
+-        "UAA": "(합성 중단)",
+-        "UAG": "(합성 중단)",
+-        "UGA": "(합성 중단)"
+-    }
+-
+-    target_codon, target_amino = random.choice(list(codon_table.items()))
+-
+-    print("=" * 50)
+-    print("코돈 추론 게임: 단백질을 합성하기")
+-    print(f"힌트: 리보솜이 현재 '{target_amino}' 아미노산 필요")
+-    print("4종류의 염기(A, U, G, C)를 조합, 3글자 코돈을 입력")
+-    print("=" * 50)
+-
+-    attempts = 0
+-    max_attempts = 6 
+-
+-    while attempts < max_attempts:
+-        guess = input(f"[{attempts + 1}/{max_attempts}] 3글자 코돈 입력: ").upper()
+-
+-        if len(guess) != 3 or any(n not in "AUGC" for n in guess):
+-            print("잘못된 입력 A, U, G, C 중에서 3글자를 입력")
+-            continue
+-
+-        if guess == target_codon:
+-            print(f"\n정답: {guess} 코돈 {target_amino} 정확히 지정")
+-            print("성공적으로 단백질 변형 과정 진행")
+-            break
+-        feedback = []
+-        for i in range(3):
+-            if guess[i] == target_codon[i]:
+-                feedback.append(f"[{guess[i]}: 🟢")
+-            elif guess[i] in target_codon:
+-                feedback.append(f"[{guess[i]}: 🟡")
+-            else:
+-                feedback.append(f"[{guess[i]}: ⚫️")
+-
+-        print("결과:", " ".join(feedback))
+-        attempts += 1
+-
+-    if guess != target_codon:
+-        print(f"\n정답: {target_codon}, {target_amino}")
+-
+-    print("\n[과학적 원리] 유전 암호는 3개의 염기로 구성된 코돈 체계를 사용하며,")
+-    print("세균부터 사람까지 거의 모든 생명체가 동일한 유전 암호 체계를 공유합니다 .")
+-
+-
+-while True:
+-    start_codon_game()
+\ No newline at end of file
+Index: ../code_test/fir_code.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../code_test/fir_code.py b/../code_test/fir_code.py
+new file mode 100644
+--- /dev/null	(date 1780974144432)
++++ b/../code_test/fir_code.py	(date 1780974144432)
+@@ -0,0 +1,11 @@
++nums = [100, 200, 300, 400, 500]
++
++# del nums[3]
++# del nums[3]
++
++# nums.pop()
++# nums.pop()
++
++nums = nums[:3]
++
++print(nums)
+\ No newline at end of file
+Index: ../.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"VcsDirectoryMappings\">\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\n    <mapping directory=\"$PROJECT_DIR$/공식 암기\" vcs=\"Git\" />\n    <mapping directory=\"$PROJECT_DIR$/공식 암기/asdf\" vcs=\"Git\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../.idea/vcs.xml b/../.idea/vcs.xml
+--- a/../.idea/vcs.xml	(revision 0cbf8192a807a7bd17f1575f965e7bf5897713d7)
++++ b/../.idea/vcs.xml	(date 1780573437837)
+@@ -2,6 +2,8 @@
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+     <mapping directory="$PROJECT_DIR$" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$/python-project" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$/science" vcs="Git" />
+     <mapping directory="$PROJECT_DIR$/공식 암기" vcs="Git" />
+     <mapping directory="$PROJECT_DIR$/공식 암기/asdf" vcs="Git" />
+   </component>
+Index: ../code_test/sec_code.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../code_test/sec_code.py b/../code_test/sec_code.py
+new file mode 100644
+--- /dev/null	(date 1780974026726)
++++ b/../code_test/sec_code.py	(date 1780974026726)
+@@ -0,0 +1,3 @@
++l = [200, 100, 300]
++l.insert(2, 10000)
++print(l)
+\ No newline at end of file
+Index: ../code_test/thi_code.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../code_test/thi_code.py b/../code_test/thi_code.py
+new file mode 100644
+--- /dev/null	(date 1780975219531)
++++ b/../code_test/thi_code.py	(date 1780975219531)
+@@ -0,0 +1,9 @@
++y = "2019"
++mo = "04"
++d = "26"
++h = "11"
++mi = "34"
++s = "27"
++
++print(y, mo, d, sep = '/', end = ' ')
++print(h, mi, s, sep = ':')
+\ No newline at end of file
+Index: ../code_test/for_code.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../code_test/for_code.py b/../code_test/for_code.py
+new file mode 100644
+--- /dev/null	(date 1780976001919)
++++ b/../code_test/for_code.py	(date 1780976001919)
+@@ -0,0 +1,7 @@
++n = int(input())
++
++
++for i in range(1, n):
++    star = "* " * (2 * i - 1)
++    no = "  " * ( n - i - 1)
++    print(no + star + no)
+\ No newline at end of file

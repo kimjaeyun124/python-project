@@ -1,5 +1,5 @@
 # board.py
-from pieces import Pawn, Rook, Knight, Bishop, Queen, King
+from pieces import *
 
 class Board:
     def __init__(self):
