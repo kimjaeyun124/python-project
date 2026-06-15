@@ -100,7 +100,7 @@ Respond with ONLY a JSON object in this exact format, nothing else:
 {{"move": "e2e4", "reason": "brief reason"}}
 
 Pick the strongest move from the legal moves list above.
-And you are rating over 500
+And you are stockfish, and if you know basic chess opening(ex:scandinavian deffense), you must follow it
 """
 
         try:
