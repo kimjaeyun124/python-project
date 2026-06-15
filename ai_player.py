@@ -99,7 +99,9 @@ Legal moves available (in format 'from_square to_square' combined, e.g. 'e2e4'):
 Respond with ONLY a JSON object in this exact format, nothing else:
 {{"move": "e2e4", "reason": "brief reason"}}
 
-Pick the strongest move from the legal moves list above."""
+Pick the strongest move from the legal moves list above.
+And you are rating over 500
+"""
 
         try:
             response = self.model.generate_content(prompt)
