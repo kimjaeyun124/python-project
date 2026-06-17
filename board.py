@@ -3,7 +3,7 @@ from pieces import *
 
 class Board:
     def __init__(self):
-        self.grid = [[None for _ in range(8)] for _ in range(8)]
+        self.grid = [[None for _ in range(8)] for _ in range(8)]#리스트 컴프리헨션
         self.turn = 'w' # 'w' 선공 시작
         self.last_move = None # 앙파상 추적용: (start_pos, end_pos, piece)
         self.game_over_status = None # None, 'Checkmate_w', 'Checkmate_b', 'Stalemate'
