@@ -31,7 +31,7 @@ class Board:
         return None
 
     def is_under_attack(self, pos, attacker_color, grid):
-        """특정 좌표(pos)가 적에게 공격받고 있는지 검증 (체크 및 캐슬링 통과 칸 확인용)"""
+        #특정 좌표(pos)가 적에게 공격받고 있는지 검증 (체크 및 캐슬링 통과 칸 확인용)
         for r in range(8):
             for c in range(8):
                 piece = grid[r][c]
@@ -46,7 +46,7 @@ class Board:
         return False
 
     def is_in_check(self, color, grid):
-        """킹이 체크당한 상태인지 확인"""
+        #킹이 체크당한 상태인지 확인
         king_pos = self.find_king(color, grid)
         if not king_pos: 
             return False
@@ -54,7 +54,7 @@ class Board:
         return self.is_under_attack(king_pos, enemy_color, grid)
 
     def get_strict_legal_moves(self, start_pos):
-        """체크 회피 의무를 반영한 '진짜 움직일 수 있는 칸'만 필터링"""
+        #체크 회피 의무를 반영한 '진짜 움직일 수 있는 칸'만 필터링
         r, c = start_pos
         piece = self.grid[r][c]
         if not piece or piece.color != self.turn:
@@ -92,7 +92,7 @@ class Board:
         return strict_moves
 
     def move_piece(self, start_pos, end_pos):
-        """실제 이동을 수행하고 특수 규칙을 정산한 후 턴을 넘깁니다."""
+        #실제 이동을 수행하고 특수 규칙을 정산한 후 턴을 넘깁니다.
         if end_pos not in self.get_strict_legal_moves(start_pos):
             return False
 
@@ -132,7 +132,7 @@ class Board:
         return True
 
     def check_game_status(self):
-        """현재 턴인 플레이어가 둘 수 있는 수가 있는지 확인하여 승패를 판단합니다."""
+        #현재 턴인 플레이어가 둘 수 있는 수가 있는지 확인하여 승패를 판단합니다.
         has_any_move = False
         for r in range(8):
             for c in range(8):
