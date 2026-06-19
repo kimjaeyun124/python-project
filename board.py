@@ -23,7 +23,7 @@ class Board:
             self.grid[7][col] = placement[col]('w')
 
     def find_king(self, color, grid):
-        """특정 색상 킹의 위치를 반환"""
+        #특정 색상 킹의 위치를 반환
         for r in range(8):
             for c in range(8):
                 if grid[r][c] and grid[r][c].name == 'k' and grid[r][c].color == color:
@@ -73,7 +73,7 @@ class Board:
 
             # 가상 이동 상태에서 내가 체크에 걸리지 않는다면 합법적인 수
             if not self.is_in_check(self.turn, self.grid):
-                # 특수 예외: 캐슬링할 때 통과하는 칸들이 공격받고 있다면 제외해야 함
+                # 특수 예외: 캐슬링할 때 통과하는 칸들이 공격받고 있다면 제외
                 if piece.name == 'k' and abs(c - target_c) == 2:
                     enemy = self.reverseColor(self.turn)
                     if target_c == 6:
@@ -92,7 +92,7 @@ class Board:
         return strict_moves
 
     def move_piece(self, start_pos, end_pos):
-        #실제 이동을 수행하고 특수 규칙을 정산한 후 턴을 넘깁니다.
+        #실제 이동을 수행하고 특수 규칙을 정산한 후 턴을 넘김
         if end_pos not in self.get_strict_legal_moves(start_pos):
             return False
 
@@ -132,7 +132,7 @@ class Board:
         return True
 
     def check_game_status(self):
-        #현재 턴인 플레이어가 둘 수 있는 수가 있는지 확인하여 승패를 판단합니다.
+        #현재 턴인 플레이어가 둘 수 있는 수가 있는지 확인
         has_any_move = False
         for r in range(8):
             for c in range(8):
